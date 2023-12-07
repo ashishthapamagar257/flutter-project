@@ -1,6 +1,7 @@
 import 'package:firstapp/constants/app_sizes.dart';
 import 'package:firstapp/model/note.dart';
 import 'package:firstapp/provider/riverpod_providers.dart';
+import 'package:firstapp/views/widgets/add_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -49,7 +50,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class HomePage extends StatelessWidget {
   HomePage({super.key});
 
-  final textControl = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -67,21 +68,9 @@ class HomePage extends StatelessWidget {
           return Column(
             children: [
               AppSizes.gapH14,
-              TextFormField(
-                controller: textControl,
-                onFieldSubmitted: (val) {
-                  final note = Note(
-                      title: val.trim(), createdAt: DateTime.now().toString());
-                  ref.read(todoProvider.notifier).noteAdd(note);
-                  textControl.clear();
-                },
-                decoration: const InputDecoration(
-                    hintText: 'Add Home',
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.today)),
-              ),
+              AddField(ref: ref),
+
+
               Expanded(
                   child: ListView.builder(
                       itemCount: notes.length,
@@ -90,29 +79,73 @@ class HomePage extends StatelessWidget {
                         return ListTile(
                           title: Text(note.title),
                           subtitle: Text(note.createdAt),
-                          trailing: Container(
-                            width: 100,
+                          trailing: SizedBox(
+                              width: 100,
                               child: Row(
                                 children: [
-                                  IconButton(onPressed: (){},  icon: Icon(Icons.edit)),
-
-                                  IconButton(onPressed: (){
-                                    showDialog(context: context, builder: (context){
-                                      return AlertDialog(
-                                        title: Text('Hold On'),
-                                        content: Text('Are You Sure ?'),
-                                        actions: [
-                                          TextButton(onPressed: (){
-                                            Navigator.pop(context);
-                                            ref.read(todoProvider.notifier).noteRemove(note);
-                                          }, child: Text('Yes')),
-                                          TextButton(onPressed: (){
-                                            Navigator.pop(context);
-                                          }, child: Text('No')),
-                                        ],
-                                      );
-                                    });
-                                  }, icon: Icon(Icons.delete)),
+                                  IconButton(
+                                      onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return AlertDialog(
+                                                title: const Text('Edit'),
+                                                content: TextFormField(
+                                                  initialValue: note.title,
+                                                  onFieldSubmitted: (val) {
+                                                    final newNote = Note(
+                                                        title: val.trim(),
+                                                        createdAt:
+                                                            note.createdAt);
+                                                    ref
+                                                        .read(todoProvider
+                                                            .notifier)
+                                                        .noteUpdate(newNote);
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                                actions: [
+                                                  TextButton(
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child:
+                                                          const Text('Cancel'))
+                                                ],
+                                              );
+                                            });
+                                      },
+                                      icon: const Icon(Icons.edit)),
+                                  IconButton(
+                                      onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return AlertDialog(
+                                                title: const Text('Hold On'),
+                                                content: const Text(
+                                                    'Are You Sure ?'),
+                                                actions: [
+                                                  TextButton(
+                                                      onPressed: () {
+                                                        Navigator.pop(context);
+                                                        ref
+                                                            .read(todoProvider
+                                                                .notifier)
+                                                            .noteRemove(note);
+                                                      },
+                                                      child: const Text('Yes')),
+                                                  TextButton(
+                                                      onPressed: () {
+                                                        Navigator.pop(context);
+                                                      },
+                                                      child: const Text('No')),
+                                                ],
+                                              );
+                                            });
+                                      },
+                                      icon: const Icon(Icons.delete)),
                                 ],
                               )),
                         );
