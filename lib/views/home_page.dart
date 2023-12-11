@@ -48,7 +48,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 //   }
 // }
 class HomePage extends StatelessWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
 
 
