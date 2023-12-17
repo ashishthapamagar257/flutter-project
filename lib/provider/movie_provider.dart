@@ -5,3 +5,4 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
 final movieProvider = FutureProvider((ref) => MovieService.getMovie());
+

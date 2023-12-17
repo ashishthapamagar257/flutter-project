@@ -1,8 +1,11 @@
 
 
-import 'package:firstapp/provider/movie_provider.dart';
+import 'package:firstapp/provider/food_povider.dart';
+import 'package:firstapp/views/detail_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 
 
 
@@ -11,25 +14,50 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,ref) {
-    final state = ref.watch(movieProvider);
-    return  Tab(
-      child: Scaffold(
-        appBar: AppBar(
-          bottom: TabBar(
-            tabs: [
-              Tab(text: 'Popular',),
-              Tab(text: 'TopRated',),
-              Tab(text: 'UpComing',),
-            ],
-          ),
-        ),
-        body: TabBarView(
-          children: [
-            Text('data1'),
-            Text('data2'),
-            Text('data3'),
-          ],
-        ),
+    final state = ref.watch(categoryProvider);
+    return  Scaffold(
+      body: SafeArea(
+        child: state.when(
+            data: (data){
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GridView.builder(
+                  itemCount: data.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      mainAxisExtent: 200
+                    ),
+                    itemBuilder: (context,index){
+                      final food = data[index];
+                      return InkWell(
+                        onTap: (){
+                          Get.to(() => DetailPage(mealCata: food.strCategory),transition: Transition.leftToRight);
+                        },
+                        child: Card(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                Text(food.strCategory),
+                                Image.network(food.strCategoryThumb),
+                                Text(food.strCategoryDescription, maxLines: 3,)
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                ),
+              );
+            },
+            error: (err, st){
+              return Center(child: Text('$err'));
+            },
+            loading: (){
+              return Center(child: CircularProgressIndicator());
+
+    },
+        )
       ),
     );
 
