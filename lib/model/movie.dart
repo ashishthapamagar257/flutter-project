@@ -5,6 +5,7 @@ class Movie{
   final String title;
   final String overview;
   final String poster_path;
+  final String backdrop_path;
   final String vote_average;
   final int id;
 
@@ -13,14 +14,16 @@ class Movie{
     required this.overview,
     required this.id,
     required this.poster_path,
+    required this.backdrop_path,
     required this.vote_average
 });
   factory Movie.fromJson(Map<String, dynamic> json){
     return Movie(
-        title: json['title'],
-        overview: json['overview'],
-        id: json['id'],
-        poster_path: json['poster_path'],
+        title: json['title'] ?? '',
+        overview: json['overview'] ?? '',
+        id: json['id'] ?? '',
+        poster_path: 'https://image.tmdb.org/t/p/w500${json['poster_path']}',
+        backdrop_path: 'https://image.tmdb.org/t/p/w500${json['backdrop_path']}',
         vote_average: json['vote_average'].toString()
     );
   }
@@ -35,25 +38,4 @@ class Movie{
     ')';
   }
 
-}
-final data = {
-  "_id": "EgCOqrOa1",
-  "content": "Learning is the beginning of wealth. Learning is the beginning of health. Learning is the beginning of spirituality. Searching and learning is where the miracle process all begins.",
-  "author": "Jim Rohn",
-  "tags": [
-    "Inspirational"
-  ],
-  "authorSlug": "jim-rohn",
-  "length": 180,
-  "dateAdded": "2020-09-29",
-  "dateModified": "2023-04-14"
-};
-
-class Data {
-  List<String>tags;
-
-
-  Data({
-    required this.tags
-});
 }

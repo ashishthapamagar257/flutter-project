@@ -1,16 +1,10 @@
 import 'package:firstapp/views/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:firstapp/constants/colors.dart';
 
-
-
-
-
-void main() async{
-
+void main() async {
   runApp(const ProviderScope(child: Home()));
 }
 
@@ -21,33 +15,15 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    return ScreenUtilInit(
-      minTextAdapt: true,
-      designSize: Size(width, height),
-      builder: (c, d) => GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          useMaterial3: true,
-          fontFamily: 'Raleway',
-          appBarTheme: const AppBarTheme(backgroundColor: AppColors.backGroundColors
-            // backgroundColor: Colors.pink.shade400,
-            // foregroundColor: Colors.black
-          ),
-          colorSchemeSeed: AppColors.mainColor,
-          scaffoldBackgroundColor: AppColors.backGroundColors,
-          // textTheme: TextTheme(
-          //   titleMedium: TextStyle()
-          // )
-        ),
-        // theme: ThemeData.dark().copyWith(
-        //     useMaterial3: true,
-        //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink)
-        // ),
-        home: const HomePage(),
-        // home: Counter(),
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        useMaterial3: true,
+        fontFamily: 'Raleway',
+        colorSchemeSeed: AppColors.mainColor,
+        scaffoldBackgroundColor: AppColors.backGroundColors,
       ),
+      home: const HomePage(),
     );
   }
 }
-
-

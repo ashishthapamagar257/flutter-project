@@ -1,33 +1,43 @@
 
 
-import 'package:firstapp/provider/movie_provider.dart';
+import 'package:firstapp/constants/api.dart';
+import 'package:firstapp/views/search_page.dart';
+import 'package:firstapp/views/widgets/tab_bar_widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 
 
 
-class HomePage extends ConsumerWidget {
+
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context,ref) {
-    final state = ref.watch(movieProvider);
-    return  Tab(
+  Widget build(BuildContext context) {
+    return  DefaultTabController(
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
-          bottom: TabBar(
+          title: const Text('Movie TMDB'),
+          actions: [
+            IconButton(onPressed: (){
+              Get.to(()=> SearchPage(), transition: Transition.leftToRight);
+            }, icon: const Icon(CupertinoIcons.search))
+          ],
+          bottom: const TabBar(
             tabs: [
               Tab(text: 'Popular',),
               Tab(text: 'TopRated',),
-              Tab(text: 'UpComing',),
+              Tab(text: 'Upcoming',),
             ],
           ),
         ),
         body: TabBarView(
           children: [
-            Text('data1'),
-            Text('data2'),
-            Text('data3'),
+            TabBarWidgets(api: Api.popularMovie),
+            TabBarWidgets(api: Api.topRatedMovie),
+            TabBarWidgets(api: Api.upComingMovie),
           ],
         ),
       ),
