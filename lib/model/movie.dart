@@ -39,3 +39,27 @@ class Movie{
   }
 
 }
+// class Reco{
+//   final String userId;
+//   final String id;
+//   final String title;
+//   final String body;
+//
+//
+//   Reco({
+//     required this.userId,
+//     required this.id,
+//     required this.title,
+//     required this.body
+// });
+//
+//   factory Reco.fromJson(Map<String, dynamic>json){
+//     return Reco(
+//     userId: json['userId'] ??'',
+//     id: json['id']??'',
+//   title: json['title']??'',
+//   body: json['body'].toString()
+//   );
+//   }
+//
+// }
