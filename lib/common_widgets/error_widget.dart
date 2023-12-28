@@ -9,9 +9,8 @@ class ErrorUi extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(message,style: TextStyle(fontSize: 20,color: Colors.pink),)
+        Text(message, style: TextStyle(fontSize: 20, color: Colors.pink),)
       ],
     );
   }
 }
-

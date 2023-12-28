@@ -14,38 +14,37 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final state = ref.watch(mealProvider);
-    return  Scaffold(
-      appBar: AppBar(),
-      body: state.when(
-          data: (data){
-            return GridView.builder(
-              itemCount: data.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3
-                ),
-                itemBuilder: (context, index){
-                final cata = data[index];
-                return InkWell(
-                  onTap: (){
-                    Get.to(()=> ItemPage(label: cata.strCategory),transition: Transition.leftToRight);
-                  },
-                  child: Column(
-                    children: [
-                      Text(cata.strCategory),
-                      Image.network(cata.strCategoryThumb)
-                    ],
+
+    return Scaffold(
+        appBar: AppBar(),
+        body: state.when(
+            data: (data){
+              return GridView.builder(
+                  itemCount: data.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2
                   ),
-                );
-                }
-            );
-          },
-          error: (err,st){
-            return ErrorUi(message: '$err');
-          },
-          loading: () => const LoadingWidget()
-      )
+                  itemBuilder: (context, index){
+                    final cata = data[index];
+                    return InkWell(
+                      onTap: (){
+                        Get.to(() => ItemPage(label: cata.strCategory), transition: Transition.leftToRight);
+                      },
+                      child: Column(
+                        children: [
+                          Text(cata.strCategory),
+                          Image.network(cata.strCategoryThumb),
+                        ],
+                      ),
+                    );
+                  }
+              );
+            },
+            error: (err, st){
+              return ErrorUi(message: '$err');
+            },
+            loading: () => LoadingWidget()
+        )
     );
   }
 }
-
-
