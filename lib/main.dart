@@ -21,7 +21,7 @@ class Home extends StatelessWidget {
         useMaterial3: true,
         fontFamily: 'Raleway',
         colorSchemeSeed: AppColors.mainColor,
-        scaffoldBackgroundColor: AppColors.backGroundColors,
+        scaffoldBackgroundColor: AppColors.backGroundColor,
       ),
       home: const HomePage(),
     );
