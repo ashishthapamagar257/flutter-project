@@ -1,10 +1,14 @@
+
 import 'package:firstapp/provider/movie_provider.dart';
+
 import 'package:firstapp/views/detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+
+
 
 
 class TabBarWidgets extends ConsumerWidget {

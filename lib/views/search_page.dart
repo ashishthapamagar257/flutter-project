@@ -6,17 +6,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 
 
+
 class SearchPage extends ConsumerWidget {
   const SearchPage({super.key});
 
   @override
   Widget build(BuildContext context, ref) {
-    final state = ref.watch(searchProvider);
+    final state= ref.watch(searchProvider);
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Search Movies'),
-      ),
-        body:Padding(
+        appBar: AppBar(
+          title: Text('Search Movies'),
+        ),
+        body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
@@ -29,10 +31,10 @@ class SearchPage extends ConsumerWidget {
                   }
                 },
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  hintText: 'search',
-                  suffixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder()
+                    contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    hintText: 'search',
+                    suffixIcon: Icon(Icons.search),
+                    border: OutlineInputBorder()
                 ),
               ),
               AppSizes.gapH16,
@@ -47,7 +49,7 @@ class SearchPage extends ConsumerWidget {
                                 mainAxisSpacing: 5,
                                 childAspectRatio: 2/3
                             ),
-                            itemBuilder: (context,index){
+                            itemBuilder: (context, index){
                               final movie = data[index];
                               return InkWell(
                                   onTap: (){
@@ -67,3 +69,13 @@ class SearchPage extends ConsumerWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
