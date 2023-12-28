@@ -85,4 +85,3 @@ class TabBarWidgets extends ConsumerWidget {
     );
   }
 }
-
