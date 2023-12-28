@@ -12,9 +12,13 @@ class MovieService {
       }
   ));
 
-  static Future<List<Movie>> getMovie({required String apiPath}) async {
+  static Future<List<Movie>> getMovie({required String apiPath, required int page}) async {
     try {
-      final response = await dio.get(apiPath);
+      final response = await dio.get(apiPath,
+          queryParameters: {
+       'page':page
+      }
+      );
       return (response.data['results'] as List).map((e) => Movie.formJson(e) ).toList();
     } on DioException catch (err) {
       throw '${err.message}';
