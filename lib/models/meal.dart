@@ -1,5 +1,4 @@
 
-
 class MealCategory {
   final String idCategory;
   final String strCategory;
