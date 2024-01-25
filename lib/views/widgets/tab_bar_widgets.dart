@@ -34,7 +34,7 @@ class TabBarWidgets extends StatelessWidget {
                 child: Image.network(item.poster_path)),
               pagedBuilder: (controller, builder) =>
             PagedGridView(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                     crossAxisSpacing: 5,
                     mainAxisSpacing: 5,
